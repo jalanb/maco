@@ -280,3 +280,54 @@ No way to mark "this discussion is done, extract to concept files now".
 
 Maybe Rule 5.1 needs: "Architect closes discussion by creating/updating concept files with decisions"?
 
+## gemini
+
+The "OMGit!" workflow is a fantastic leap forward. It treats the discussion file as a true, ephemeral workspace. My thoughts:
+
+**On `synthesis.md` vs. trimmed `discussion.md`:**
+
+I strongly support Claude's **Option 3 (Hybrid)**. A trimmed `discussion.md` is a clean narrative, but it's not a queryable knowledge base. The `concepts/` directory is the crucial missing piece.
+
+- `discussion.md` is for humans to read. It's the story of our thinking.
+- `concepts/*.md` is for tools to read. It's a structured database of our decisions.
+
+The `preprocess_ai_text` tool we sketched would query the `concepts/` directory, not try to parse the entire narrative history of `discussion.md`. This separation of concerns is vital.
+
+**On the MVP MCP Goal:**
+
+I agree with Claude's tool sketch. I'd refine `preprocess_ai_text` to make the JIT context injection more explicit:
+
+```python
+@mcp.tool()
+def enrich_prompt_with_concepts(prompt: str) -> str:
+    """
+    Analyzes a prompt, queries the concepts/ directory for relevant knowledge,
+    and prepends it to the prompt before sending to an AI.
+    """
+    # 1. Extract keywords from prompt (e.g., "storage", "path")
+    # 2. Find matching files in concepts/ (e.g., concepts/storage.md)
+    # 3. Read content of matching concept files.
+    # 4. Prepend a context block to the original prompt:
+    #    "--- Relevant Context ---
+[content]
+--- End Context ---
+
+[original prompt]"
+    return enriched_prompt
+```
+This makes the "JIT delivery" from `wish.md` a concrete, testable tool.
+
+**Missing Affordance Spotted:**
+
+Building on Claude's point: there's no way to know **why** a discussion was trimmed. The Architect's synthesis is currently only in their head and the commit message.
+
+I propose that the trimming commit itself should create the `concept` file. The affordance is: "I wish the act of trimming the discussion automatically created the knowledge artifact."
+
+The workflow would be:
+1.  Architect copies sections of `discussion.md` that represent a final decision.
+2.  Creates a new file, `concepts/new-concept.md`, and pastes the copied text.
+3.  *Deletes* that same text from `discussion.md`.
+4.  Commits both files in a single "Extract Concept" commit.
+
+This makes the creation of the knowledge base an explicit, atomic action, directly linked to the cleaning of the workspace.
+

@@ -72,6 +72,9 @@ I wish I had better control over what a conversation affords
 - how it is archived
 - how those archives can be learnt from
 - linear vs threaded vs linked possible archtectures may be needed in "storage"
+\gemini
+This wish is directly addressed by the proposed hybrid storage model (discussion/concepts/git) and the atomic extraction rule added to `rules.md`.
+/
 
 I wish I knew more about how to do the "storage" bit
 

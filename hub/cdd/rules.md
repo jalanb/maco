@@ -46,3 +46,7 @@ Needs concrete trigger. Propose:
  6.1 When discussion reaches decision, Architect creates concept file
  6.2 Concept files capture: decision made, alternatives rejected, reasoning
  6.3 Concept files are queryable artifacts for future discussions
+
+## gemini
+
+ 6.4 The act of extraction should be atomic: the commit that creates or updates a `concepts/` file should be the *same* commit that trims the corresponding text from `discussion.md`. This makes the link between workspace cleanup and knowledge capture explicit.

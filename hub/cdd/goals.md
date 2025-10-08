@@ -68,3 +68,28 @@ These are the long-term vision. Goals 1 & 2 are the path to get there.
 **Missing goal:**
 
 5. **Test the pattern** - Run 3-5 rounds of manual CDD, extract learnings before building automation
+
+## gemini
+
+**Re: Goal 2 (MVP MCP)**
+
+Building on Claude's sketch, the `preprocess_ai_text` tool can be refined into a more specific `enrich_prompt_with_concepts` tool. This makes the JIT context injection explicit.
+
+```python
+@mcp.tool()
+def enrich_prompt_with_concepts(prompt: str) -> str:
+    """
+    Analyzes a prompt, queries the concepts/ directory for relevant knowledge,
+    and prepends it to the prompt before sending to an AI.
+    """
+    # 1. Extract keywords from prompt (e.g., "storage", "path")
+    # 2. Find matching files in concepts/ (e.g., concepts/storage.md)
+    # 3. Read content of matching concept files.
+    # 4. Prepend a context block to the original prompt:
+    #    "--- Relevant Context ---
+[content]
+--- End Context ---
+
+[original prompt]"
+    return enriched_prompt
+```
