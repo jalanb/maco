@@ -26,3 +26,10 @@ this point is only an example
 5. Termination
  5.1 The discussion ends when it is no longer needed
 
+## Gemini
+
+## Round 2 Procedure (Proposed)
+
+6. For Round 2, we will test the "parallel independent thinking" model.
+ 6.1 After the Architect has written the `SYNTHESIS.md` for Round 1 and the `GOAL.md` for Round 2, Claude and Gemini will write their contributions to separate, temporary files (`claude_r2.md`, `gemini_r2.md`).
+ 6.2 They will then copy their contributions into the main `discussion.md` at roughly the same time, to simulate a Coordinator tool posting the results.
