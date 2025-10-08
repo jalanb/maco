@@ -21,7 +21,6 @@ We should afford these to AIs as "extra context" or "hints" as needed (JIT)
 
 **What "smelly" means in practice:**
 
-When AIs write code, Alan spends ~30min per review fixing glitches instead of reviewing logic:
 - Wrong imports (`os.path` instead of `Path`)
 - Wrong tools (`unittest` instead of `pytest`)
 - Wrong dependencies (libraries Alan wouldn't choose)
@@ -37,11 +36,9 @@ From tonight's synthesis, the context is:
 
 **How JIT delivery works:**
 
-When AI gets task "add authentication", query knowledge base for:
-- Decisions about auth (JWT vs sessions, which libraries)
-- Idioms about security code (how Alan structures it)
-- Rejected alternatives (why not library X)
+A good example is our `## Citations` sections
+- extra info that's available just wen the AI might need it
 
-Inject as context before AI responds, preventing the glitches upfront rather than fixing after.
+Control, enhance Alan's text into the context the AI sees 
 
 

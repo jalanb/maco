@@ -17,19 +17,8 @@ There are more than 2 users in the discussion, so we need some rules:
  3.2 A user can write to a file by commenting on other text in the file, anywhere in the file
   3.2.1 A user can comment by starting with (e.g.) `\gemini` on a line, then their comment, then `/` on a line
   3.2.2 For example this point is followed by a comment by Alan
-\alan
-this point is only an example
-/
 4. Updating
  4.1 Updating old text is NOT allowed
  4.2 Deleting old text is NOT allowed
 5. Termination
  5.1 The discussion ends when it is no longer needed
-
-## Gemini
-
-## Round 2 Procedure (Proposed)
-
-6. For Round 2, we will test the "parallel independent thinking" model.
- 6.1 After the Architect has written the `SYNTHESIS.md` for Round 1 and the `GOAL.md` for Round 2, Claude and Gemini will write their contributions to separate, temporary files (`claude_r2.md`, `gemini_r2.md`).
- 6.2 They will then copy their contributions into the main `discussion.md` at roughly the same time, to simulate a Coordinator tool posting the results.
