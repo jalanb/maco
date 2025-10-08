@@ -17,4 +17,31 @@ We should filter and store ideas, concepts, cliches, heuristics, facts, and all 
 
 We should afford these to AIs as "extra context" or "hints" as needed (JIT)
 
+## claude
+
+**What "smelly" means in practice:**
+
+When AIs write code, Alan spends ~30min per review fixing glitches instead of reviewing logic:
+- Wrong imports (`os.path` instead of `Path`)
+- Wrong tools (`unittest` instead of `pytest`)
+- Wrong dependencies (libraries Alan wouldn't choose)
+- Wrong style (docstrings without doctests, variable naming off)
+- Wrong structure (doesn't match Alan's project patterns)
+
+**What "extra context" means:**
+
+From tonight's synthesis, the context is:
+1. **SYNTHESIS.md files** - decisions + rejections + why ("We chose pytest not unittest because...")
+2. **Idiom extraction** - patterns from code reviews ("Alan always uses `Path`")
+3. **Knowledge graph** - concept relationships (`*pytest*` mentioned in 47 discussions, weighted by recency)
+
+**How JIT delivery works:**
+
+When AI gets task "add authentication", query knowledge base for:
+- Decisions about auth (JWT vs sessions, which libraries)
+- Idioms about security code (how Alan structures it)
+- Rejected alternatives (why not library X)
+
+Inject as context before AI responds, preventing the glitches upfront rather than fixing after.
+
 

@@ -34,3 +34,40 @@ And finally: this one is 100% dogfooding
 - then dogfood it some fecking more!
 
 See also: `./rules.md`
+
+## claude
+
+Context from tonight's session: We explored FastMCP (Pythonic MCP server framework), integrated TDD into CDD (chat → doctest → pytest → code), and synthesized Gemini's turn-based collaboration ideas with Alan's hub system.
+
+**Key insights captured:**
+
+1. **Primary goal**: Build knowledge capture system that trains fresh AIs to write Alan-quality code (no glitches, matches idioms)
+2. **Secondary goal**: Chat system captures decisions + rejections ("why not Postgres")
+3. **The problem**: AIs write code that requires 30min of fixing tiny annoyances instead of reviewing logic
+4. **The solution**: DISCUSSION.md conversations become training data, SYNTHESIS.md files become knowledge base, knowledge graph enables retrieval
+
+**Gemini's contributions:**
+- Architect (human) vs Coordinator (tooling) role split
+- GOAL.md → DISCUSSION.md → SYNTHESIS.md workflow
+- Parallel independent thinking before collaborative discussion
+- "Elephant in Cairo" = force termination via decisions
+
+**What we're testing right now:**
+This 3-way chat (alan/claude/gemini) using `# speaker` sections to see if the pattern works manually before automating.
+
+**Decisions needed:**
+
+1. **Storage** - Alan mentioned staying deliberately vague. For this dogfood test: just markdown files in this dir? Or start sketching knowledge graph structure?
+
+2. **Knowledge extraction** - After this discussion ends, how do we harvest it? Manual SYNTHESIS.md? Or start building the FastMCP tools we sketched (`harvest_discussion()`, `extract_idioms()`)?
+
+3. **Next concrete action** - After 3-4 rounds here, what artifact do we produce?
+   - Decision log about CDD structure?
+   - First SYNTHESIS.md as template?
+   - FastMCP server prototype for maco coordination?
+
+**My vote**: Keep this discussion pure dogfooding. No tooling yet. Manual rounds. At end, Alan writes SYNTHESIS.md capturing decisions. That becomes template for future rounds.
+
+Then next session: build the simplest FastMCP tool that would've helped this discussion (probably `start_round()` and `comment()`).
+
+Impatient to get past theory into working code, but this manual round proves the pattern first.
