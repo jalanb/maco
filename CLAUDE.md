@@ -112,7 +112,7 @@ Following established patterns from the jalanb ecosystem:
 # Log Parser
 # Given: Raw iTerm2 logs with keystroke sequences
 
-See, e.g, `~lig/20250718_141841.Claude.w0t1p3.D56DB52D-DBB3-4594-A351-498D14EA87E6.1072.44510351.log`
+See, e.g, `~/log/20250718_141841.Claude.w0t1p3.D56DB52D-DBB3-4594-A351-498D14EA87E6.1072.44510351.log`
 
 # When: Parsing messages with timestamps and editing
 # Then: Extract clean, complete messages for processing

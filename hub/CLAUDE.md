@@ -1,60 +1,100 @@
-# Maco Hub Orchestration Requirements
+# Maco Orchestration Implementation Strategy
 
 ## Planning Mode: On
 
-The maco project needs to build tooling to orchestrate the hub system defined in the foundational architecture discussion.
+The 14-step algorithm needs concrete implementation. Breaking down the technical requirements.
 
-## Core Requirements from Architecture
+## Core Orchestration Components
 
-#### The 14-step algorithm needs automation:
-1. Channel creation (`mkd channel`)
-2. Library file linking
-3. Participant invitation and file creation
-4. Round coordination (steps 8-13)
-5. UPPER.md archival to database
-6. Iteration until convergence (empty files)
-7. Final HUB.md narrative generation
+**File System Watcher:**
+```python
+# inotify-based monitoring preferred over polling
+from watchdog import Observer, FileSystemEventHandler
 
-## Technical Challenges
+class HubWatcher(FileSystemEventHandler):
+    def on_modified(self, event):
+        if event.src_path.endswith('/UPPER.md'):
+            self.check_round_completion()
+```
 
-#### File watching and coordination:
-- Detect when all participants have written their files
-- Archive UPPER.md files between rounds
-- Signal when rounds are complete
+**Round Coordinator:**
+- Detect when all participants have written files
+- Archive UPPER.md files to SQLite database  
+- Clear files for next round
+- Generate final HUB.md when convergence reached
 
-#### Multi-AI orchestration:
-- Invite AIs in team order
-- Coordinate simultaneous file reading/writing
-- Handle timing and synchronization
-- Build on existing maco chat/UI foundations
+**AI Invitation System:**
+- Queue-based with configurable team order
+- Timeout handling for non-responsive AIs
+- Graceful degradation and retry logic
 
-#### UI/UX considerations:
-- Terminal-first workflow (jalanb requirement)
-- Integration with existing iTerm setup
-- Real-time status visibility
+## Technical Decisions
 
-## Questions
+**Database Schema:**
+```sql
+CREATE TABLE rounds (
+    id INTEGER PRIMARY KEY,
+    hub_path TEXT,
+    round_number INTEGER,
+    participant TEXT,
+    content TEXT,
+    timestamp DATETIME
+);
+```
 
-__Gold - Need clarification:__
-1. How does maco detect "team order" for AI invitations?
-2. What database should store the archived UPPER.md rounds?
-3. How do we handle AIs that fail to respond or error out?
+**Error Handling:**
+- AI timeout: Continue with available responses
+- File corruption: Restore from previous round  
+- System crash: Resume from database state
 
-__Silver - Implementation details:__
-4. File watching vs polling for round completion?
-5. Should the final HUB.md be markdown or structured data?
+## Integration Points
 
-## Immediate Tasks
+**With existing maco architecture:**
+- Leverage iTerm2 log parsing for AI communication
+- Build on chat/UI foundations when they exist
+- Use pysyte patterns for configuration discovery
 
-1. __File system watcher__ - Monitor hub directories for completion
-2. __Round coordinator__ - Implement the archive/iterate cycle
-3. __AI invitation system__ - Programmatic way to invite AIs to hubs
-4. __Narrative generator__ - Combine rounds into coherent HUB.md
+**With hub system:**
+- Monitor multiple hub directories simultaneously
+- Handle nested hub structures (like jalanb/hub/hub/)
+- Coordinate with git-based conversation versioning
 
-This is foundational infrastructure that enables all other hub conversations.
+## Implementation Questions
 
-## Citations
+**Gold - Need clarity:**
+1. Which AI invitation protocol? (iTerm2 panes vs direct file writes)
+2. Where does orchestration run? (background daemon vs on-demand)
+3. How do we bootstrap the first maco hub conversation?
 
-- `/Users/jab/jalanb/jalanb/hub/hub/ALAN.md` - Foundational hub architecture and 14-step algorithm (lines 69-87)
-- `/Users/jab/jalanb/jalanb/hub/hub/ALAN.md` - Lines 42, 105: maco project ownership
-- `/Users/jab/jalanb/macos/maco/CLAUDE.md` - Existing maco project context
+**Silver - Implementation details:**
+4. SQLite file location and backup strategy?
+5. Timeout values for different AIs?
+6. Integration with existing `gc` git helpers?
+
+## MVP Scope
+
+**Phase 1 (Next week):**
+- Basic file watching for single hub
+- Manual round coordination (no automation)
+- Simple UPPER.md archival to files (not database)
+
+**Phase 2 (Following week):**
+- Multi-hub monitoring
+- Automated round detection and clearing
+- SQLite integration for round history
+
+**Phase 3 (Future):**
+- AI invitation automation
+- HUB.md narrative generation
+- Integration with pysyte ecosystem
+
+## Dogfooding Strategy
+
+**Use this exact hub system to develop maco:**
+- Each implementation decision gets discussed in maco/hub/
+- Round-based architecture review before coding
+- Real-world testing of the orchestration algorithms
+
+The meta-recursion of using hubs to build hub tooling is perfect validation.
+
+Ready to begin Phase 1 implementation.

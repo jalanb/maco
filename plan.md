@@ -2,14 +2,12 @@
 
 ## Executive Summary
 
-**Goal**: Create a working Multi-AI Conversation Orchestrator (maco) that coordinates conversations between Claude, Gemini, and rovodev through iTerm2 log monitoring and hub-based broadcasting.
 
-**Timeline**: 3 development sprints (2-3 weeks each)
-**Success Metric**: Successfully coordinate a multi-AI development session using maco
+__Timeline__: 3 development sprints (2-3 weeks each)
+__Success Metric__: Successfully coordinate a multi-AI development session using maco
 
 ## Immediate Next Steps (This Week)
 
-### 1. Project Foundation
 ```bash
 # Use crumbcutter for project scaffolding
 cd /opt/clones/github/jalanb/crumbs/crumbcutter
@@ -20,18 +18,11 @@ cd /opt/clones/github/jalanb/macos/maco
 pip install -e .
 ```
 
-### 2. Sample Data Collection
-- [ ] **Collect real iTerm2 logs** from current AI sessions
-- [ ] **Document log format variations** across different AI interactions
-- [ ] **Identify parsing challenges** from actual data
-- [ ] **Create test fixtures** from anonymized log samples
-
-### 3. Basic Log Parser (Priority 1)
-- [ ] **Parse timestamp format**: `[18/07/2025, 14:18:42.700]`
-- [ ] **Extract clean messages** from keystroke sequences
-- [ ] **Handle editing patterns** (backspace, corrections)
-- [ ] **Test with real log data**
-- [ ] **integrate with zatso**
+- [ ] __Parse timestamp format__: `[18/07/2025, 14:18:42.700]`
+- [ ] __Extract clean messages__ from keystroke sequences
+- [ ] __Handle editing patterns__ (backspace, corrections)
+- [ ] __Test with real log data__
+- [ ] __integrate with zatso__
 
 ## Sprint 1: Core Infrastructure (Weeks 1-2)
 
@@ -39,10 +30,10 @@ pip install -e .
 Build and test the foundational components with real iTerm2 logs.
 
 ### Deliverables
-1. **Working log parser** that extracts clean messages
-2. **File watcher system** monitoring log changes in real-time
-3. **Basic hub coordinator** managing multiple channels
-4. **CLI interface** for `maco watch` and `maco history`
+1. __Working log parser__ that extracts clean messages
+2. __File watcher system__ monitoring log changes in real-time
+3. __Basic hub coordinator__ managing multiple channels
+4. __CLI interface__ for `maco watch` and `maco history`
 
 ### Tasks Breakdown
 
@@ -71,10 +62,10 @@ maco channels                        # List active channels
 ```
 
 ### Success Criteria
-- [ ] **Parse real logs**: Successfully extract messages from actual iTerm2 sessions
-- [ ] **Real-time monitoring**: Detect new messages within 1-2 seconds
-- [ ] **Multi-channel support**: Track Claude, Gemini, rovodev separately
-- [ ] **Basic search**: Find messages by keyword and channel
+- [ ] __Parse real logs__: Successfully extract messages from actual iTerm2 sessions
+- [ ] __Real-time monitoring__: Detect new messages within 1-2 seconds
+- [ ] __Multi-channel support__: Track Claude, Gemini, rovodev separately
+- [ ] __Basic search__: Find messages by keyword and channel
 
 ## Sprint 2: Broadcasting & Integration (Weeks 3-4)
 
@@ -82,10 +73,10 @@ maco channels                        # List active channels
 Implement message broadcasting to AI panes and Python API integration.
 
 ### Deliverables
-1. **Broadcasting system** sending messages to specific iTerm2 panes
-2. **Python API** for programmatic hub interaction
-3. **Configuration system** using pysyte patterns
-4. **Integration tests** with actual multi-AI scenarios
+1. __Broadcasting system__ sending messages to specific iTerm2 panes
+2. __Python API__ for programmatic hub interaction
+3. __Configuration system__ using pysyte patterns
+4. __Integration tests__ with actual multi-AI scenarios
 
 ### Key Features
 ```python
@@ -105,10 +96,10 @@ def handle_gemini(sender, content, timestamp):
 ```
 
 ### Technical Challenges
-- **iTerm2 automation**: AppleScript integration for message injection
-- **Message correlation**: Link broadcasts with AI responses
-- **Pane identification**: Map channels to specific iTerm2 panes
-- **Error handling**: Graceful failure when AIs are offline
+- __iTerm2 automation__: AppleScript integration for message injection
+- __Message correlation__: Link broadcasts with AI responses
+- __Pane identification__: Map channels to specific iTerm2 panes
+- __Error handling__: Graceful failure when AIs are offline
 
 ## Sprint 3: Production Ready (Weeks 5-6)
 
@@ -116,29 +107,29 @@ def handle_gemini(sender, content, timestamp):
 Polish for real-world usage and prepare for distribution.
 
 ### Deliverables
-1. **Conversation management** with threading and context preservation
-2. **Advanced search** with semantic capabilities
-3. **Performance optimization** for long development sessions
-4. **Documentation completion** and tutorial creation
+1. __Conversation management__ with threading and context preservation
+2. __Advanced search__ with semantic capabilities
+3. __Performance optimization__ for long development sessions
+4. __Documentation completion__ and tutorial creation
 
 ### Production Features
-- **Session persistence**: Save/restore conversation state
-- **Export functionality**: Generate session reports and summaries
-- **Plugin architecture**: Support for additional AI assistants
-- **Performance monitoring**: Track resource usage and optimization
+- __Session persistence__: Save/restore conversation state
+- __Export functionality__: Generate session reports and summaries
+- __Plugin architecture__: Support for additional AI assistants
+- __Performance monitoring__: Track resource usage and optimization
 
 ## Dependencies & Prerequisites
 
 ### External Dependencies
-- **iTerm2**: Session logging must be configured and working
-- **Python 3.13+**: For async/await and modern type hints
-- **macOS**: Required for iTerm2 automation
+- __iTerm2__: Session logging must be configured and working
+- __Python 3.13+__: For async/await and modern type hints
+- __macOS__: Required for iTerm2 automation
 
 ### Internal Dependencies
-- **pysyte**: Configuration discovery and path utilities
-- **pym**: Visitor patterns for structured parsing
-- **zatso**: Bi-directional parsing for complex log formats
-- **crumbcutter**: Project scaffolding and structure
+- __pysyte__: Configuration discovery and path utilities
+- __pym__: Visitor patterns for structured parsing
+- __zatso__: Bi-directional parsing for complex log formats
+- __crumbcutter__: Project scaffolding and structure
 
 ### Setup Requirements
 ```bash
@@ -156,32 +147,32 @@ osascript -e 'tell application "iTerm2" to get name of every session of current 
 ## Resource Allocation
 
 ### Time Estimates
-- **Sprint 1**: 15-20 hours (core infrastructure)
-- **Sprint 2**: 12-15 hours (broadcasting and API)
-- **Sprint 3**: 10-12 hours (polish and optimization)
-- **Total**: ~40 hours over 6 weeks
+- __Sprint 1__: 15-20 hours (core infrastructure)
+- __Sprint 2__: 12-15 hours (broadcasting and API)
+- __Sprint 3__: 10-12 hours (polish and optimization)
+- __Total__: ~40 hours over 6 weeks
 
 ### Effort Distribution
-- **60% Implementation**: Core features and functionality
-- **25% Testing**: Unit tests, integration tests, dogfooding
-- **15% Documentation**: Updates to README, CLAUDE.md, examples
+- __60% Implementation__: Core features and functionality
+- __25% Testing__: Unit tests, integration tests, dogfooding
+- __15% Documentation__: Updates to README, CLAUDE.md, examples
 
 ### Critical Path
-1. **Log Parser** → File Watcher → Hub Coordinator
-2. **Broadcasting** → Python API → Configuration
-3. **Integration** → Testing → Documentation
+1. __Log Parser__ → File Watcher → Hub Coordinator
+2. __Broadcasting__ → Python API → Configuration
+3. __Integration__ → Testing → Documentation
 
 ## Risk Mitigation
 
 ### Technical Risks
-- **iTerm2 API limitations**: Fallback to manual copying if automation fails
-- **Log format changes**: Build flexible parser with version detection
-- **Performance issues**: Implement caching and efficient file monitoring
+- __iTerm2 API limitations__: Fallback to manual copying if automation fails
+- __Log format changes__: Build flexible parser with version detection
+- __Performance issues__: Implement caching and efficient file monitoring
 
 ### Schedule Risks
-- **Complexity underestimation**: Focus on MVP features first
-- **Integration challenges**: Test with real usage scenarios early
-- **Dependency delays**: Have fallback implementations ready
+- __Complexity underestimation__: Focus on MVP features first
+- __Integration challenges__: Test with real usage scenarios early
+- __Dependency delays__: Have fallback implementations ready
 
 ## Success Metrics
 
@@ -201,10 +192,10 @@ osascript -e 'tell application "iTerm2" to get name of every session of current 
 - [ ] Performance acceptable for sessions with 500+ messages
 
 ### Overall Project Success
-- [ ] **Dogfooding**: Develop a significant feature using maco coordination
-- [ ] **Multi-AI coordination**: Successfully coordinate Claude/Gemini/rovodev
-- [ ] **Workflow improvement**: Measurable reduction in context switching
-- [ ] **Distribution ready**: Package installable via `pip install macos`
+- [ ] __Dogfooding__: Develop a significant feature using maco coordination
+- [ ] __Multi-AI coordination__: Successfully coordinate Claude/Gemini/rovodev
+- [ ] __Workflow improvement__: Measurable reduction in context switching
+- [ ] __Distribution ready__: Package installable via `pip install macos`
 
 ## Sprint 4: Enhanced Architecture (Future Vision)
 
@@ -215,52 +206,51 @@ Extend maco with structured conversation channels and knowledge extraction capab
 *See `architecture.md` for comprehensive design rationale and technical decisions.*
 
 ### Deliverables
-1. **Directory-Based Conversation Channels**
+1. __Directory-Based Conversation Channels__
    - Structured hub organization (`./hub/{project}/{topic}/{participant}.md`)
    - Git-versioned conversation history
    - Asynchronous file-based communication
    - Reduced typo visibility with vim-based editing
 
-2. **Rich Data Source MCP**
+2. __Rich Data Source MCP__
    - Transform conversation files into structured knowledge
    - Cross-file conversation threading and context extraction
    - Problem-solution pattern recognition and mapping
    - Decision tracking with reasoning chains
    - Searchable knowledge base for AI consumption
 
-3. **"Conversation as Code" Patterns**
+3. __"Conversation as Code" Patterns__
    - Versionable AI-human collaboration workflows
    - Cross-project knowledge sharing
    - Reusable conversation patterns and templates
 
 ### Integration with Core maco
-- **Extends** File Watcher to monitor `./hub/` directories
-- **Enhances** Conversation Manager with file-based persistence
-- **Adds** MCP layer for knowledge extraction
-- **Maintains** existing iTerm2 real-time capabilities
+- __Extends__ File Watcher to monitor `./hub/` directories
+- __Enhances__ Conversation Manager with file-based persistence
+- __Adds__ MCP layer for knowledge extraction
+- __Maintains__ existing iTerm2 real-time capabilities
 
 ### Success Criteria
-- [ ] **Directory channels working**: Write-process-git-wipe cycle functional
-- [ ] **Knowledge extraction**: MCP identifies problem-solution patterns
-- [ ] **Cross-project value**: Hub conversations benefit multiple projects
-- [ ] **Async collaboration**: Effective vim-based conversation editing
+- [ ] __Directory channels working__: Write-process-git-wipe cycle functional
+- [ ] __Knowledge extraction__: MCP identifies problem-solution patterns
+- [ ] __Cross-project value__: Hub conversations benefit multiple projects
+- [ ] __Async collaboration__: Effective vim-based conversation editing
 
 ## Next Actions
 
 ### Immediate (Today)
-1. **Collect sample logs** from current AI sessions
-2. **Set up development environment** with proper dependencies
-3. **Create initial project structure** using crumbcutter
+1. __Collect sample logs__ from current AI sessions
+2. __Set up development environment__ with proper dependencies
+3. __Create initial project structure__ using crumbcutter
 
 ### This Week
-1. **Implement basic log parser** with real data
-2. **Test file watching** with live iTerm2 sessions
-3. **Design hub coordinator** architecture
+1. __Implement basic log parser__ with real data
+2. __Test file watching__ with live iTerm2 sessions
+3. __Design hub coordinator__ architecture
 
 ### Next Sprint Planning
-1. **Review Sprint 1 deliverables** and adjust timeline
-2. **Plan broadcasting implementation** based on iTerm2 research
-3. **Define integration test scenarios** for multi-AI workflows
+1. __Review Sprint 1 deliverables__ and adjust timeline
+2. __Plan broadcasting implementation__ based on iTerm2 research
 
 ---
 
