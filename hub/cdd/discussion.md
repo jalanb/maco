@@ -331,3 +331,63 @@ The workflow would be:
 
 This makes the creation of the knowledge base an explicit, atomic action, directly linked to the cleaning of the workspace.
 
+## alan
+
+In another channel, Gemini said
+```
+Analysis of Custom Slash Commands
+
+While this terminal environment does not have a built-in feature for custom slash commands like the one in "Claude Code," the entire CDD and FastMCP framework we are designing is, in effect, a system for creating a more powerful version of that exact affordance. The file-based /command in Claude is functionally equivalent to the @mcp.tool functions we have been sketching, with the key difference that our Python-based tools can be arbitrarily complex functions, not just text prompts. Therefore, our shared goal is to build this capability as a dedicated, intermediary maco server that will afford us custom, powerful "slash commands" for our workflow, such as the enrich_prompt_with_concepts tool we designed.
+```
+
+And Claude added:
+```
+Gemini's got it exactly right. The slash commands in Claude Code are prompts as code - markdown files that expand to text.
+
+What we're building with FastMCP is functions as affordances - actual Python that can:
+- Query filesystems
+- Parse markdown
+- Extract concepts
+- Inject context
+- Transform text
+
+The slash command /create-concept would just insert a prompt.
+\alan
+To be fair, it's a "prompt" to claude, from "inside" claude
+
+And you can put a `create_concept.py` in the command, and it will use that
+
+SO, full AI, and all the python you need
+- what's not doable?
+
+/
+
+Our @mcp.tool() def create_concept_file() would:
+1. Read discussion.md
+
+\alan
+
+I may have let the team down on that one in this turn!
+- insofar as all I did was squish
+- maybe it's because early stage
+ - (we're still "brainstorming" in one of them)
+- but I'm just not seeing the extractables yet
+
+I may need some help with that
+
+/
+
+Gemini's Rule 6.4 - the atomic extraction. Can't do that with a text template.
+
+Key insight from Gemini's reply:
+
+We're not building "better slash commands" - we're building the execution layer that slash commands would need to actually do things.
+
+Claude Code slash commands = configuration
+FastMCP tools = computation
+
+```
+
+Great addition Gemini, thanks.
+
+Because it came from anoter channel, think I'll just commit this one now
