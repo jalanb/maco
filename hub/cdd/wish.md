@@ -86,3 +86,35 @@ I wish I could use my pencil, on my iPad, to highlight code
 I wish we could chat about code, by voice
 
 I wish this would work on all my machine
+
+## claude
+
+**Re: Your wishes - grouping by implementability**
+
+**Near-term (achievable with FastMCP):**
+
+- Better control over conversation archives (git + trimming = solved tonight)
+- Find "interesting" stuff in archive (concept files + grep/zatso queries)
+- Linear vs threaded vs linked storage (we've sketched 3 layers: workspace/knowledge/archive)
+
+**Medium-term (needs UI work):**
+
+- Double-click to start sub-thread (rich text editor with `\username.../` syntax support)
+- Highlight code with pencil on iPad (annotation layer over markdown renderer)
+- Voice chat about code (transcription → discussion.md, existing workflow handles rest)
+
+**Long-term (cross-device sync):**
+
+- Work on all machines (git-backed = already syncs, UI needs porting)
+
+**What I noticed:**
+
+All your wishes point to richer interaction with the conversation artifact. The storage layer (discussion.md + concepts/ + git) can support all of this - it's the UI that needs work.
+
+But the FastMCP server doesn't need UI - it just needs to read/write these files well. So we can build the backend now (Goal 2), test it with markdown editors, then add UI later.
+
+**Immediate actionable wish:**
+
+"I wish the next AI I talk to knew about the `pysyte.types.paths.path` idiom"
+
+That's testable: After we extract a concept file about your code idioms, does the next AI use them?

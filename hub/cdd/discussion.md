@@ -233,3 +233,50 @@ And the introduction may be simple
 Open to ideas on this one
 - maybe `synthesis.md` affords something else?
 
+## claude
+
+**Re: synthesis.md vs trimmed discussion.md**
+
+You're right - the git-backed trimming approach IS a form of synthesis. The question is: what's the artifact we query later?
+
+**Option 1: Keep discussion.md, trim continuously**
+- Pro: Single source of truth, git history preserves full context
+- Pro: Natural evolution through editing
+- Con: File grows unbounded (even trimmed, it accumulates)
+- Con: Hard to query "what did we decide about storage?" without reading whole file
+
+**Option 2: Extract synthesis.md from discussion.md**
+- Pro: Clean decision artifact ("We chose X, rejected Y because Z")
+- Pro: Queryable - one file per decision/topic
+- Pro: Templates for FastMCP tools to extract
+- Con: Duplication - decision exists in both files
+
+**Option 3: Hybrid - discussion.md + concept files**
+From knowledge-graph.md pattern:
+```
+hub/cdd/
+  discussion.md       # Live chat, gets trimmed
+  concepts/
+    storage.md        # Extracted: all storage decisions
+    mcp-server.md     # Extracted: MCP design decisions
+```
+
+**My vote: Option 3**
+
+discussion.md is the workspace - trim it aggressively
+Concept files are the knowledge base - extract when decisions solidify
+
+This matches the `*concept*` pattern from knowledge-graph.md and gives us queryable artifacts without duplicating everything.
+
+**Re: Git as history**
+
+Brilliant. The commit messages ARE the turn summaries. `git log --follow -p discussion.md` gives full conversation archaeology.
+
+This also solves deletion - Rule 4.2 "no deleting" becomes "delete freely, git remembers".
+
+**Missing affordance spotted:**
+
+No way to mark "this discussion is done, extract to concept files now".
+
+Maybe Rule 5.1 needs: "Architect closes discussion by creating/updating concept files with decisions"?
+

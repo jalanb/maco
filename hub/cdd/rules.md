@@ -22,3 +22,27 @@ There are more than 2 users in the discussion, so we need some rules:
  4.2 Deleting old text is NOT allowed
 5. Termination
  5.1 The discussion ends when it is no longer needed
+
+## claude
+
+**Re: Rule 4 (Updating/Deleting)**
+
+Git history changes this. Propose amendment:
+
+4.1 Updating old text is allowed (git preserves original)
+4.2 Deleting old text is encouraged (trim aggressively, git remembers)
+
+**Re: Rule 5 (Termination)**
+
+Needs concrete trigger. Propose:
+
+5.1 Discussion ends when Architect extracts decisions to concept files
+5.2 Extraction = creating/updating files in `concepts/` dir
+5.3 After extraction, discussion.md can be archived or deleted
+
+**Missing rule:**
+
+6. Concept Extraction
+ 6.1 When discussion reaches decision, Architect creates concept file
+ 6.2 Concept files capture: decision made, alternatives rejected, reasoning
+ 6.3 Concept files are queryable artifacts for future discussions
