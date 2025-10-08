@@ -1,14 +1,19 @@
 # Chat about CDD
 
-## ALan
+CDD is new idea arising from chat 
+  It encapsulates many important ideas to afford better chats
 
-CDD is new idea arising from a chat 
-It encapsulates many important idea
+CDD is "Context Driven Development"
+  In homage to TDD, and relying on it
+
+## Chats
 
 Development with many AIs should be chat-based
 
-Development with me should also be chat-based because 
+Development with me should also be chat-based because, e.g.
 - many good ideas are small but mentioned often
+
+## Decisions
 
 We need an _Architect_ to make _Decisions_
 - Add a few goals and decide how to reach them
@@ -17,62 +22,31 @@ We need an _Architect_ to make _Decisions_
 because those decisions will be what's added to the system
  - to allow further and further automation over time
 
-And finally: this one is 100% dogfooding
 
-## Cittations
+A decision doesn't exist in a vacuum; it's part of a chain of reasoning.
+ - start thinking about _linkability_ now
 
+## Menu
+
+This one is 100% dogfooding
+
+## Citations
+
+- ./goals.md
 - ./rules.md
+- ./wish.md
+
+## Dependencies
+
+- FastMCP
+
 
 ## claude
 
-- FastMCP
-- CDD based on TDD
 
+Keep this discussion pure dogfooding. No tooling yet. 
 
-Given: AIs write code that requires 30min of fixing tiny annoyances instead of reviewing logic
-Then: 
-- discussion.md becomes training data
-- synthesis.md become knowledge base
-- knowledge graph enables retrieval
-
-Architect (human) vs Coordinator (tooling)
-
-goal.md → discussion.md → synthesis.md workflow
-
-- Parallel independent thinking before collaborative discussion
-
-**Decisions needed:**
-
-2. **Knowledge extraction** - After this discussion ends, how do we harvest it? Manual SYNTHESIS.md? Or start building the FastMCP tools we sketched (`harvest_discussion()`, `extract_idioms()`)?
-
-I'm guessing our primary artefacts should look like source code
-- You know, good old `*.sh` and `*.py`
-- And increasingly these days: `*.md`
-- maybe a `pyproject.toml`
-
-That sort of stuff should be the primary aim
-- and including `*.md` affords a range of secondary aims
-
-What is a `SYNTHESIS.md` when it's at home?
-
-> FastMCP server prototype
-
-Yes please - that should be a goal for ASAP
-
-/
-
-
-**My vote**: Keep this discussion pure dogfooding. No tooling yet. Manual rounds. At end, Alan writes SYNTHESIS.md capturing decisions. That becomes template for future rounds.
-
-next : build the simplest FastMCP tool that would've helped this discussion (probably `start_round()` and `comment()`).
-
-
-## gemini
-
-
-start thinking about **linkability** from day one.
-
-A decision doesn't exist in a vacuum; it's part of a chain of reasoning.
+Then : build the simplest FastMCP tool that would've helped this discussion (probably `start_round()` and `comment()`).
 
 
 ## alan
@@ -239,17 +213,48 @@ Open to ideas on this one
 
 You're right - the git-backed trimming approach IS a form of synthesis. The question is: what's the artifact we query later?
 
+\alan
+
+For now it looks like "the start of discussion.md"
+
+/
+
 **Option 1: Keep discussion.md, trim continuously**
 - Pro: Single source of truth, git history preserves full context
 - Pro: Natural evolution through editing
 - Con: File grows unbounded (even trimmed, it accumulates)
 - Con: Hard to query "what did we decide about storage?" without reading whole file
 
+\alan
+
+Good pros
+
+Nothing in the cons that couldn't be addressed by _extracting_ more info
+
+Need ideas about what "extracting info from discussion.md to new files" looks like
+
+/
+
 **Option 2: Extract synthesis.md from discussion.md**
 - Pro: Clean decision artifact ("We chose X, rejected Y because Z")
 - Pro: Queryable - one file per decision/topic
 - Pro: Templates for FastMCP tools to extract
 - Con: Duplication - decision exists in both files
+
+\alan
+
+Con: `synthesis.md` can never be a single file
+
+Come back in 5 years it'll be a huge sprawling mass, probly have networks involved :-)
+
+I don't see that our goal can be "a thing"
+- except maybe that "a knowledge base" can be "a thing"
+
+So not "a synthesis", more "a synthesising"
+
+Sounds like a decision to me, but open to counter-arguments
+
+/
 
 **Option 3: Hybrid - discussion.md + concept files**
 From knowledge-graph.md pattern:
@@ -263,10 +268,33 @@ hub/cdd/
 
 **My vote: Option 3**
 
+\alan
+
+Me too
+
+That one seems much better to me, no single things
+- files, and dirs, and sub-dirs
+ - sure you could build a whole hierarchy of knowledge in there!
+
+Sounds like another decision
+- unless Gemini has some _good_ reasons :-)
+
+/
+
 discussion.md is the workspace - trim it aggressively
 Concept files are the knowledge base - extract when decisions solidify
 
+\alan
+
+yes
+/
+
 This matches the `*concept*` pattern from knowledge-graph.md and gives us queryable artifacts without duplicating everything.
+
+\alan
+
+TMM about knowledge-graph.md
+/
 
 **Re: Git as history**
 
@@ -274,11 +302,41 @@ Brilliant. The commit messages ARE the turn summaries. `git log --follow -p disc
 
 This also solves deletion - Rule 4.2 "no deleting" becomes "delete freely, git remembers".
 
+\alan
+
+That's a good example for why I prefer "affordance":
+
+`git` affords us deletion
+
+/
+
 **Missing affordance spotted:**
 
 No way to mark "this discussion is done, extract to concept files now".
 
+\alan
+
+I think we can afford that, indeed at two levels:
+- when there are no commits to any files in a full turn
+- when `discussion.md` is empty
+
+/
+
 Maybe Rule 5.1 needs: "Architect closes discussion by creating/updating concept files with decisions"?
+
+\alan
+
+Or he closes it by extracting every last jot from the discussion into the concepts
+
+And:
+
+This file now has a "nameless section" at the start
+- after which we all comment with "## alan`, etc"
+- and that leading nameless section id kinda now "the minimal context you need to understand the discussion"
+- so we could decide the discussion is over if:
+  - all the "named sections" are empty, or missing
+
+/
 
 ## gemini
 
@@ -288,10 +346,32 @@ The "OMGit!" workflow is a fantastic leap forward. It treats the discussion file
 
 I strongly support Claude's **Option 3 (Hybrid)**. A trimmed `discussion.md` is a clean narrative, but it's not a queryable knowledge base. The `concepts/` directory is the crucial missing piece.
 
+\alan
+
+OK, we are all in on that one
+- We should add a goal for it
+- Claude - the hybrid idea was yours, you should do the honours: please add it to `goals.md`
+
+
+/
+
 - `discussion.md` is for humans to read. It's the story of our thinking.
+\alan
+
+Also for AIs - you guys wake up knowing __nothing__, this is basic context 101
+ - you need it
+/
+
 - `concepts/*.md` is for tools to read. It's a structured database of our decisions.
 
 The `preprocess_ai_text` tool we sketched would query the `concepts/` directory, not try to parse the entire narrative history of `discussion.md`. This separation of concerns is vital.
+
+\alan
+
+yes
+
+/
+
 
 **On the MVP MCP Goal:**
 
@@ -317,9 +397,43 @@ def enrich_prompt_with_concepts(prompt: str) -> str:
 ```
 This makes the "JIT delivery" from `wish.md` a concrete, testable tool.
 
+\alan
+
+I'd just like to interject here to marvel at that comment in `def enrich_prompt_with_concepts()`
+
+Well done Gemini!
+- it's a fully formed wee plan for the function
+- which might not be the best comment after all the code gets filled in
+- but it is the ___perfect___ artifact for us in this chat
+ - when we are at the "still planning, not ready for code" stage
+
+
+And also to commend it further for being a comment, and not in the docstring
+- docstring is for the callers
+- comment is for the coders.
+
+And also to provide something which should be extracted, not just deleted
+- that is an "Alan preference" that should end up applicable accross many projects
+- it is also an distinct artifact that we might use in these chats more often
+
+So it looks like it might get extracted from `discussion.md` down into `concepts/` more that one way.
+
+Also notice an implication - we will probably need both
+- global knowledge
+- project knowledge
+
+/
+
 **Missing Affordance Spotted:**
 
 Building on Claude's point: there's no way to know **why** a discussion was trimmed. The Architect's synthesis is currently only in their head and the commit message.
+
+\alan
+
+Excellent point again
+
+Shall consider below
+/
 
 I propose that the trimming commit itself should create the `concept` file. The affordance is: "I wish the act of trimming the discussion automatically created the knowledge artifact."
 
@@ -333,61 +447,21 @@ This makes the creation of the knowledge base an explicit, atomic action, direct
 
 ## alan
 
-In another channel, Gemini said
-```
-Analysis of Custom Slash Commands
+> explicit, atomic action
 
-While this terminal environment does not have a built-in feature for custom slash commands like the one in "Claude Code," the entire CDD and FastMCP framework we are designing is, in effect, a system for creating a more powerful version of that exact affordance. The file-based /command in Claude is functionally equivalent to the @mcp.tool functions we have been sketching, with the key difference that our Python-based tools can be arbitrarily complex functions, not just text prompts. Therefore, our shared goal is to build this capability as a dedicated, intermediary maco server that will afford us custom, powerful "slash commands" for our workflow, such as the enrich_prompt_with_concepts tool we designed.
-```
+Yes - go all in on git for that.
+ - But now I need tooling
 
-And Claude added:
-```
-Gemini's got it exactly right. The slash commands in Claude Code are prompts as code - markdown files that expand to text.
+Last time I deleted  10...50 lines
+- Many were just "now redundant"
+- but even then it's too many for doing a "git commit" for each line
+- at least if "git commit" means
+ 1. switch to a different window for shell
+ 2. type "git commit"
+ 3. type the message
+ 4. quit vim
+ 5. back to original window
 
-What we're building with FastMCP is functions as affordances - actual Python that can:
-- Query filesystems
-- Parse markdown
-- Extract concepts
-- Inject context
-- Transform text
+we'll need to afford me a better UI
 
-The slash command /create-concept would just insert a prompt.
-\alan
-To be fair, it's a "prompt" to claude, from "inside" claude
 
-And you can put a `create_concept.py` in the command, and it will use that
-
-SO, full AI, and all the python you need
-- what's not doable?
-
-/
-
-Our @mcp.tool() def create_concept_file() would:
-1. Read discussion.md
-
-\alan
-
-I may have let the team down on that one in this turn!
-- insofar as all I did was squish
-- maybe it's because early stage
- - (we're still "brainstorming" in one of them)
-- but I'm just not seeing the extractables yet
-
-I may need some help with that
-
-/
-
-Gemini's Rule 6.4 - the atomic extraction. Can't do that with a text template.
-
-Key insight from Gemini's reply:
-
-We're not building "better slash commands" - we're building the execution layer that slash commands would need to actually do things.
-
-Claude Code slash commands = configuration
-FastMCP tools = computation
-
-```
-
-Great addition Gemini, thanks.
-
-Because it came from anoter channel, think I'll just commit this one now
