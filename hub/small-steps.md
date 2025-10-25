@@ -41,6 +41,21 @@ Raw Dialogue → Fixed Windows → Learned Carryover → Structured KB → AI Co
 
 The knowledge base must learn what information is worth preserving across conversation boundaries. This is achieved through reinforcement learning where success is measured by the system's ability to solve future problems using compressed knowledge.
 
+The system focuses on __procedural knowledge__ ("knowledge how to") rather than __declarative knowledge__ ("knowledge that"). While traditional knowledge bases store facts and data, this architecture prioritizes actionable knowledge that survives real-world problem-solving.
+
+\claude
+An example of when the distinction is important: A beginner needs "what debugging is" before "how to debug this specific type of problem". But most of the time, the procedural knowledge is what actually solves problems.
+/
+\alan
+
+Procedural knowledge can also lead to declarative knowledge, for example when using a list in many algorithms enhances the idea of "what a list is".
+
+Procedural knowledge can also be based on declarative knowledge, for example a search algorithm needs to know what a list is, fore it can search it effectively.
+
+The two are variously interconnected, and cannot be separated easily.
+But, insofar as they can, our focus is on __procedural knowledge__.
+/
+
 __Core principle__: Knowledge chunks are better validated by their explanatory power than their frequency of mention.
 
 Example: MySQL mentioned 50 times vs MSSQL feature mentioned once that solves the problem → MSSQL reference has higher explanatory power.
@@ -54,8 +69,39 @@ The MSSQL reference was more helpful, and probably also had higher explanatory p
 
 ### Validation Framework
 
+The knowledge base employs multiple validation contexts rather than a single success metric. Different contexts require different feedback loops, creating resilience through diverse validation criteria.
+
+\claude
+Multiple feedback loops are a feature, not a bug. A robust knowledge base shouldn't have a single success metric that becomes a single point of failure. If knowledge only works in one context but fails in others, that's valuable information about its boundaries and applicability.
+/
+
+#### Context-Dependent Validation
+- __First-time learners__: "Did this help me understand the concept?"
+- __Experienced developers__: "Did this solve my specific problem?"
+- __Code reviewers__: "Did this improve code quality?"
+- __Project delivery__: "Did this move the project forward?"
+
+\jalanb
+
+We shall take a Pfirsichian approach to quality in code.
+
+/
+
 #### Soundness Validation
-- __Provenance tracking__: Every knowledge claim traces back to source conversation
+- __Provenance tracking__: Every knowledge assertion traces back to source conversation
+
+\claude
+Using "assertion" rather than "claim" - claims imply disputable statements, but we're dealing with actionable knowledge that either works or doesn't. The terminology should reflect practical utility rather than philosophical debate.
+/
+\jalanb
+
+As a Doctest Driven Developer (DDD), I'm always in favour of `assert`.
+
+I agree that we are "dealing with actionable knowledge that either works or doesn't".
+And add that the terminology should reflect testable hypotheses rather than "features" or "issues"
+
+/
+
 - __Negative evidence capture__: Record not just chosen solutions but rejected alternatives with reasoning
 - __Contradiction detection__: Identify internal inconsistencies across knowledge base
 
@@ -64,11 +110,21 @@ Knowledge validation through outcome tracking:
 - Did knowledge application lead to problem resolution?
 - What was the time-to-solution after knowledge retrieval?
 - Were additional questions needed, indicating knowledge gaps?
+- Context-specific success indicators based on user role and situation
 
 #### Consistency Enforcement
-- Cross-reference knowledge claims for logical coherence
+- Cross-reference knowledge assertions for logical coherence
 - Temporal consistency checks (newer knowledge may invalidate older assumptions)
 - Context boundary validation (knowledge applicable only in specific conditions)
+- Multi-context validation to avoid single points of failure
+
+### Feedback Loop Architecture
+
+The system implements continuous validation where __knowledge that survives real-world problem-solving gets stronger__, while knowledge that fails gets discarded or refined. This creates a "smithy effect" where constant, brutal feedback hammers off rough edges until only reliable knowledge remains.
+
+\claude
+This mirrors how coding is actually learned - through constant, brutal feedback of "this shit don't work", forcing developers into the corners that do work, and always work, and consistently work. The feedback loop teaches what actually functions vs what just sounds good.
+/
 
 ### Knowledge Orbit Mechanism
 
@@ -193,6 +249,10 @@ The feedback loop architecture ensures the system learns from actual usage patte
 Learning how often to remind about something that "should be" learned is as important as "what" should be learned.
 - That idea from "spaced learning" seems very relevant here
 - altough maybe as much in "space" as in "time"
+
+\claude
+Spaced learning in conceptual space, not just time. Knowledge that bridges distant concepts (like database features solving UI problems) might need different reinforcement patterns than knowledge within a single domain. The "space" between ideas matters as much as the time between encounters.
+/
 
 Start reading old chats first
  - Claude
